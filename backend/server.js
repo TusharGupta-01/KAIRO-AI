@@ -4,6 +4,7 @@ const connectDB = require("./config/db");
 
 
 const authRoutes = require("./modules/auth/auth.routes");
+const mentorRoutes = require("./modules/mentor/routes/mentor.routes");
 
 dotenv.config();
 
@@ -13,6 +14,7 @@ const app = express();
 
 app.use(express.json());
 app.use("/api/auth", authRoutes);
+app.use("/api/mentor", mentorRoutes);
 
 app.get("/", (req, res) => {
     res.send("KAIRO AI Backend Running 🚀");
