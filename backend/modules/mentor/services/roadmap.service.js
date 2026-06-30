@@ -18,7 +18,6 @@ const generateRoadmap = async (userId) => {
   }
   const context = await buildStudentContext(userId);
   const prompt = buildRoadmapPrompt(context);
-  console.log("Calling Gemini...");
   const response = await generateContent(prompt);
 
   const roadmap = parseRoadmap(response);

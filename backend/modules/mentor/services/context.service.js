@@ -1,5 +1,6 @@
 const StudentProfile = require("../../../models/StudentProfile");
 const Roadmap = require("../../../models/Roadmap");
+const { getRecentMessages } = require("./chatHistory.service");
 
 const buildStudentContext = async (userId) => {
   const profile = await StudentProfile.findOne({
@@ -45,13 +46,14 @@ const buildMentorContext = async (userId) => {
     throw new Error("Active roadmap not found.");
   }
 
-  const currentMission =
-    roadmap.days.find((day) => !day.completed) || null;
+  const currentMission = roadmap.days.find((day) => !day.completed) || null;
 
   const completedMissions = roadmap.days
     .filter((day) => day.completed)
     .map((day) => day.mission);
 
+  
+  const chatHistory = await getRecentMessages(userId);
   return {
     student: {
       college: profile.identity.college,
@@ -76,6 +78,7 @@ const buildMentorContext = async (userId) => {
 
       completedMissions,
     },
+    chatHistory,
   };
 };
 module.exports = {
