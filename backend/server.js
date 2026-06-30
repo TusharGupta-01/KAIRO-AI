@@ -1,12 +1,12 @@
-const express = require("express");
 const dotenv = require("dotenv");
+dotenv.config();
+const express = require("express");
 const connectDB = require("./config/db");
 
 
 const authRoutes = require("./modules/auth/auth.routes");
 const mentorRoutes = require("./modules/mentor/routes/mentor.routes");
 
-dotenv.config();
 
 // connectDB();
 

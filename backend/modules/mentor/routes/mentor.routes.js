@@ -7,8 +7,12 @@ const {
   getProfile,
   updateProfile,
 } = require("../controllers/onboarding.controller");
+const { generateRoadmap ,getRoadmap } = require("../controllers/roadmap.controller");
 
 router.post("/onboarding", authMiddleware, onboarding);
 router.get("/profile", authMiddleware, getProfile);
 router.put("/profile", authMiddleware, updateProfile);
+router.post("/roadmap", authMiddleware, generateRoadmap);
+router.get("/roadmap", authMiddleware, getRoadmap);
+
 module.exports = router;
