@@ -29,7 +29,10 @@ const getRecentMessages = async (userId, limit = 10) => {
 
   if (!chat) return [];
 
-  return chat.messages.slice(-limit);
+  // return chat.messages.slice(-limit);
+  return chat.messages
+  .slice(-limit)
+  .sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt));
 };
 module.exports = {
   saveMessage,

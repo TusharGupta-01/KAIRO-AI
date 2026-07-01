@@ -13,6 +13,7 @@ const {
   updateMission,
 } = require("../controllers/roadmap.controller");
 const { mentorChat } = require("../controllers/mentor.controller");
+const { getChatHistory } = require("../controllers/history.controller");
 
 router.post("/onboarding", authMiddleware, onboarding);
 router.get("/profile", authMiddleware, getProfile);
@@ -21,5 +22,6 @@ router.post("/roadmap", authMiddleware, generateRoadmap);
 router.get("/roadmap", authMiddleware, getRoadmap);
 router.post("/chat", authMiddleware, mentorChat);
 router.patch("/roadmap/day/:dayNumber", authMiddleware, updateMission);
+router.get("/history", authMiddleware , getChatHistory);
 
 module.exports = router;
