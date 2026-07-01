@@ -13,9 +13,17 @@ function Dashboard() {
 
   if (loading) return <div>Loading...</div>;
 
-  const currentMission =
-    roadmap.days.find((d) => !d.completed) ||
-    roadmap.days[roadmap.days.length - 1];
+  if (!roadmap || !roadmap.days) {
+  return (
+    <div className="flex h-[70vh] items-center justify-center text-white">
+      Generating your roadmap...
+    </div>
+  );
+}
+
+const currentMission =
+  roadmap.days.find((d) => !d.completed) ||
+  roadmap.days[roadmap.days.length - 1];
 
   return (
     <div className="space-y-6">

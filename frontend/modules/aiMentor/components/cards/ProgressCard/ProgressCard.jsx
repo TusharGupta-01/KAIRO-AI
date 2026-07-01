@@ -128,7 +128,7 @@ function ProgressCard({ roadmap }) {
 
         </div>
 
-        <div className="rounded-2xl border border-zinc-800 bg-zinc-950 p-4">
+        {/* <div className="rounded-2xl border border-zinc-800 bg-zinc-950 p-4">
 
           <div className="flex items-center gap-2">
 
@@ -151,7 +151,7 @@ function ProgressCard({ roadmap }) {
 
           </h3>
 
-        </div>
+        </div> */}
 
         <div className="rounded-2xl border border-zinc-800 bg-zinc-950 p-4">
 

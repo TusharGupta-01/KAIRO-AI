@@ -8,13 +8,12 @@ import Favorites from "../pages/favorites";
 import Trash from "../pages/trash";
 import Activity from "../pages/activity";
 import Settings from "../pages/settings";
-
 import FolderPage from "../pages/folder";
 
-const KnowledgeVaultRoutes = () => {
+function KnowledgeVaultRoutes() {
   return (
     <Routes>
-      <Route path="/" element={<KnowledgeVaultLayout />}>
+      <Route element={<KnowledgeVaultLayout />}>
         <Route index element={<MyLibrary />} />
 
         <Route path="my-library" element={<MyLibrary />} />
@@ -36,6 +35,6 @@ const KnowledgeVaultRoutes = () => {
       </Route>
     </Routes>
   );
-};
+}
 
 export default KnowledgeVaultRoutes;

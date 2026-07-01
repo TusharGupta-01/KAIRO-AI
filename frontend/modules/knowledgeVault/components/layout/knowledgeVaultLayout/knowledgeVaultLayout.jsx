@@ -32,12 +32,9 @@ const KnowledgeVaultLayout = () => {
     isCreateNoteModalOpen,
     closeCreateNoteModal,
 
-  isChatModalOpen,
-  closeChatModal,
-
+    isChatModalOpen,
+    closeChatModal,
   } = useFolders();
-
-  
 
   // --------------------------
   // Create Folder States
@@ -47,18 +44,15 @@ const KnowledgeVaultLayout = () => {
 
   const [description, setDescription] = useState("");
 
-  const [selectedColor, setSelectedColor] =
-    useState("#7C3AED");
+  const [selectedColor, setSelectedColor] = useState("#7C3AED");
 
   // --------------------------
   // Upload States
   // --------------------------
 
-  const [selectedFile, setSelectedFile] =
-    useState(null);
+  const [selectedFile, setSelectedFile] = useState(null);
 
-  const [selectedFolder, setSelectedFolder] =
-    useState("");
+  const [selectedFolder, setSelectedFolder] = useState("");
 
   // --------------------------
   // Create Folder
@@ -93,10 +87,7 @@ const KnowledgeVaultLayout = () => {
 
     if (!selectedFolder) return;
 
-    const extension = selectedFile.name
-      .split(".")
-      .pop()
-      .toLowerCase();
+    const extension = selectedFile.name.split(".").pop().toLowerCase();
 
     const resource = {
       id: Date.now(),
@@ -120,84 +111,93 @@ const KnowledgeVaultLayout = () => {
   };
 
   // --------------------------
-// Import Link
-// --------------------------
+  // Import Link
+  // --------------------------
 
-const handleImportLink = ({
-  title,
-  url,
-  folderId,
-}) => {
+  const handleImportLink = ({ title, url, folderId }) => {
+    const resource = {
+      id: Date.now(),
 
-  const resource = {
-    id: Date.now(),
+      name: title.trim() || new URL(url).hostname,
 
-    name:
-      title.trim() ||
-      new URL(url).hostname,
+      type: "link",
 
-    type: "link",
+      url,
 
-    url,
+      size: 0,
 
-    size: 0,
+      uploadedAt: new Date(),
 
-    uploadedAt: new Date(),
+      favorite: false,
 
-    favorite: false,
+      tags: [],
 
-    tags: [],
+      notes: [],
+    };
 
-    notes: [],
+    addResource(folderId, resource);
+
+    closeImportLinkModal();
   };
+  // --------------------------
+  // Create Note
+  // --------------------------
 
-  addResource(folderId, resource);
+  const handleCreateNote = ({ title, content, folderId }) => {
+    const resource = {
+      id: Date.now(),
 
-  closeImportLinkModal();
+      name: title,
 
-};
-// --------------------------
-// Create Note
-// --------------------------
+      type: "note",
 
-const handleCreateNote = ({
-  title,
-  content,
-  folderId,
-}) => {
-  const resource = {
-    id: Date.now(),
+      content,
 
-    name: title,
+      size: 0,
 
-    type: "note",
+      uploadedAt: new Date(),
 
-    content,
+      favorite: false,
 
-    size: 0,
+      tags: [],
 
-    uploadedAt: new Date(),
+      notes: [],
+    };
 
-    favorite: false,
+    addResource(folderId, resource);
 
-    tags: [],
-
-    notes: [],
+    closeCreateNoteModal();
   };
-
-  addResource(folderId, resource);
-
-  closeCreateNoteModal();
-};
 
   return (
-    <div className="flex h-screen w-full bg-slate-50">
+    // <div className="flex h-screen w-full bg-slate-50">
+    //   <Sidebar />
+
+    //   <div className="flex flex-1 flex-col overflow-hidden">
+    //     <Navbar />
+
+    //     <main className="flex-1 overflow-y-auto px-10 py-10">
+    //       <Outlet />
+    //     </main>
+    //   </div>
+    <div className="flex h-screen w-full flex-col bg-[#0F0F12]">
       <Sidebar />
 
       <div className="flex flex-1 flex-col overflow-hidden">
         <Navbar />
 
-        <main className="flex-1 overflow-y-auto px-10 py-10">
+        <main
+          className="
+        flex-1
+        overflow-y-auto
+        bg-[#0A0A0A]
+        px-4
+        py-5
+        md:px-6
+        md:py-6
+        lg:px-8
+      "
+        >
           <Outlet />
         </main>
       </div>
@@ -230,11 +230,11 @@ const handleCreateNote = ({
       />
 
       <ImportLinkModal
-  open={isImportLinkModalOpen}
-  onClose={closeImportLinkModal}
-  folders={folders}
-  onImport={handleImportLink}
-/>
+        open={isImportLinkModalOpen}
+        onClose={closeImportLinkModal}
+        folders={folders}
+        onImport={handleImportLink}
+      />
 
       <CreateNoteModal
         open={isCreateNoteModalOpen}
@@ -243,11 +243,7 @@ const handleCreateNote = ({
         onCreate={handleCreateNote}
       />
 
-<ChatModal
-  open={isChatModalOpen}
-  onClose={closeChatModal}
-/>
-
+      <ChatModal open={isChatModalOpen} onClose={closeChatModal} />
     </div>
   );
 };
