@@ -1,14 +1,7 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import KnowledgeVaultRoutes from "../modules/knowledgeVault/routes/knowledgeVaultRoutes";
+import AppRoutes from "./routes/AppRoutes";
 
 function App() {
-  return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/*" element={<KnowledgeVaultRoutes />} />
-      </Routes>
-    </BrowserRouter>
-  );
+  return <AppRoutes />;
 }
 
 export default App;
