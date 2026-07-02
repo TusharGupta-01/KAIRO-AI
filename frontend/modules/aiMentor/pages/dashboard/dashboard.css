@@ -1,0 +1,1063 @@
+/* .dashboard {
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    gap: 28px;
+    align-items: start;
+}
+
+.dashboard-main {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.hero {
+    background: linear-gradient(180deg, #181818 0%, #141414 100%);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 30px;
+}
+
+.small-title {
+    color: var(--text-secondary);
+    font-size: 14px;
+    margin-bottom: 8px;
+}
+
+.hero h1 {
+    font-size: 34px;
+    margin-bottom: 12px;
+}
+
+.hero p {
+    color: var(--text-secondary);
+    max-width: 650px;
+}
+
+.top-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 22px;
+}
+
+.card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 24px;
+}
+
+.card-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--text-secondary);
+    margin-bottom: 18px;
+    font-size: 14px;
+}
+
+.card h1 {
+    font-size: 48px;
+    margin: 12px 0;
+}
+
+.card h2 {
+    margin-bottom: 18px;
+}
+
+.info {
+    margin-top: 18px;
+}
+
+.info strong {
+    display: block;
+    margin-bottom: 6px;
+}
+
+.info p {
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+.progress {
+    height: 8px;
+    border-radius: 999px;
+    background: #262626;
+    overflow: hidden;
+    margin: 18px 0;
+}
+
+.progress-fill {
+    height: 100%;
+    background: white;
+    border-radius: 999px;
+}
+
+.streak {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #22C55E;
+    font-weight: 600;
+}
+
+.actions {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 18px;
+}
+
+.action-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 26px;
+    cursor: pointer;
+    transition: .25s;
+}
+
+.action-card:hover {
+    transform: translateY(-4px);
+    border-color: #555;
+}
+
+.action-card h3 {
+    margin-top: 18px;
+}
+
+.timeline {
+    position: sticky;
+    top: 20px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 24px;
+    height: fit-content;
+}
+
+.timeline h3 {
+    color: var(--text-secondary);
+    margin-bottom: 6px;
+}
+
+.timeline h2 {
+    margin-bottom: 28px;
+}
+
+.timeline-list {
+    position: relative;
+    padding-left: 8px;
+}
+
+.timeline-list::before {
+    content: "";
+    position: absolute;
+    left: 10px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: #2c2c2c;
+}
+
+.timeline-item {
+    display: flex;
+    gap: 18px;
+    position: relative;
+    margin-bottom: 28px;
+}
+
+.dot {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    z-index: 1;
+    margin-top: 2px;
+    border: 2px solid #555;
+    background: #141414;
+}
+
+.dot.completed {
+    background: white;
+    border-color: white;
+}
+
+.dot.current {
+    background: #22C55E;
+    border-color: #22C55E;
+    box-shadow: 0 0 15px rgba(34,197,94,.6);
+}
+
+.dot.pending {
+    background: #141414;
+}
+
+.timeline-item p {
+    margin-top: 4px;
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.5;
+}
+
+@media(max-width:1200px){
+
+    .dashboard{
+        grid-template-columns:1fr;
+    }
+
+    .timeline{
+        position:relative;
+    }
+
+}
+
+@media(max-width:900px){
+
+    .top-grid{
+        grid-template-columns:1fr;
+    }
+
+    .actions{
+        grid-template-columns:1fr;
+    }
+
+} */
+
+/* ===================================
+   DASHBOARD LAYOUT
+=================================== */
+
+.dashboard {
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  gap: 28px;
+  align-items: start;
+}
+
+.dashboard-main {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* ===================================
+   HERO
+=================================== */
+
+.hero {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 28px 32px;
+
+  background: linear-gradient(
+    180deg,
+    #181818 0%,
+    #141414 100%
+  );
+
+  border: 1px solid var(--border);
+  border-radius: 20px;
+}
+
+.hero-tag {
+  color: var(--text-secondary);
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+.hero h1 {
+  font-size: 34px;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.hero-subtitle {
+  color: var(--text-secondary);
+  max-width: 560px;
+  line-height: 1.7;
+}
+
+.hero-action {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  align-items: flex-end;
+}
+
+.today {
+  text-align: right;
+}
+
+.today span {
+  color: var(--text-secondary);
+  font-size: 13px;
+}
+
+.today h3 {
+  margin: 6px 0;
+  font-size: 18px;
+}
+
+.today small {
+  color: var(--text-secondary);
+}
+
+.resume-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  background: white;
+  color: black;
+
+  border: none;
+
+  padding: 14px 20px;
+
+  border-radius: 14px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: .25s;
+}
+
+.resume-btn:hover {
+  transform: translateY(-2px);
+}
+
+/* ===================================
+   GRID
+=================================== */
+
+.top-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 22px;
+}
+
+/* ===================================
+   CARD
+=================================== */
+
+.card {
+  background: var(--surface);
+
+  border: 1px solid var(--border);
+
+  border-radius: 18px;
+
+  padding: 26px;
+
+  transition: .25s;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+
+  border-color: #444;
+
+  box-shadow:
+      0 12px 28px rgba(0,0,0,.35);
+}
+
+.card-header {
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  color: var(--text-secondary);
+
+  margin-bottom: 18px;
+
+  font-size: 14px;
+}
+
+/* ===================================
+   MISSION CARD
+=================================== */
+
+.mission-card h2 {
+  margin-bottom: 20px;
+
+  font-size: 24px;
+
+  line-height: 1.4;
+}
+
+.mission-box {
+  background: var(--surface-2);
+
+  border: 1px solid var(--border);
+
+  border-radius: 14px;
+
+  padding: 16px;
+
+  margin-bottom: 16px;
+}
+
+.mission-box h4 {
+  margin-bottom: 8px;
+
+  font-size: 15px;
+}
+
+.mission-box p {
+  color: var(--text-secondary);
+
+  line-height: 1.6;
+
+  font-size: 14px;
+}
+
+.mission-footer {
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  margin-top: 20px;
+
+  color: var(--text-secondary);
+
+  font-weight: 500;
+}
+
+/* ===================================
+   PROGRESS CARD
+=================================== */
+
+.progress-card {
+  display: flex;
+
+  flex-direction: column;
+
+  justify-content: center;
+}
+
+.progress-card h1 {
+  font-size: 56px;
+
+  margin: 12px 0;
+}
+
+.progress-card p {
+  color: var(--text-secondary);
+
+  margin-bottom: 20px;
+}
+
+.progress {
+  width: 100%;
+
+  height: 10px;
+
+  border-radius: 999px;
+
+  overflow: hidden;
+
+  background: #262626;
+
+  margin-bottom: 24px;
+}
+
+.progress-fill {
+  height: 100%;
+
+  border-radius: inherit;
+
+  background: linear-gradient(
+      90deg,
+      #ffffff,
+      #9ca3af
+  );
+}
+
+.stats {
+  display: flex;
+
+  justify-content: space-between;
+
+  gap: 12px;
+}
+
+.stats div {
+  flex: 1;
+
+  background: var(--surface-2);
+
+  border: 1px solid var(--border);
+
+  border-radius: 14px;
+
+  padding: 14px;
+
+  text-align: center;
+}
+
+.stats strong {
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+
+  gap: 8px;
+
+  font-size: 18px;
+
+  margin-bottom: 6px;
+}
+
+.stats span {
+  color: var(--text-secondary);
+
+  font-size: 13px;
+}
+
+/* ===================================
+   MIDDLE GRID
+=================================== */
+
+.middle-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 22px;
+}
+
+/* ===================================
+   AI INSIGHT
+=================================== */
+
+.insight-card {
+  min-height: 220px;
+}
+
+.insight-content {
+  display: flex;
+  gap: 18px;
+  margin-top: 10px;
+}
+
+.insight-line {
+  width: 4px;
+  border-radius: 999px;
+  background: linear-gradient(
+    180deg,
+    #ffffff,
+    #666
+  );
+}
+
+.insight-content h3 {
+  margin-bottom: 10px;
+  font-size: 22px;
+}
+
+.insight-content p {
+  color: var(--text-secondary);
+  line-height: 1.8;
+  font-size: 15px;
+}
+
+/* ===================================
+   CAREER JOURNEY
+=================================== */
+
+.journey-card {
+  min-height: 220px;
+}
+
+.career-path {
+  position: relative;
+  margin-top: 10px;
+  padding-left: 14px;
+}
+
+.career-path::before {
+  content: "";
+
+  position: absolute;
+
+  left: 8px;
+
+  top: 0;
+
+  bottom: 0;
+
+  width: 2px;
+
+  background: #2d2d2d;
+}
+
+.career-stage {
+  display: flex;
+
+  align-items: center;
+
+  gap: 18px;
+
+  position: relative;
+
+  margin-bottom: 22px;
+}
+
+.stage-dot {
+  width: 18px;
+
+  height: 18px;
+
+  border-radius: 50%;
+
+  z-index: 2;
+
+  border: 2px solid #555;
+
+  background: #141414;
+
+  transition: .3s;
+}
+
+.stage-dot.completed {
+  background: white;
+  border-color: white;
+}
+
+.stage-dot.current {
+  background: #22C55E;
+  border-color: #22C55E;
+
+  box-shadow:
+      0 0 0 6px rgba(34,197,94,.15),
+      0 0 18px rgba(34,197,94,.5);
+
+  animation: pulse 2s infinite;
+}
+
+.stage-dot.pending {
+  background: #141414;
+}
+
+.stage-content strong {
+  display: block;
+  margin-bottom: 4px;
+}
+
+.stage-content p {
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+@keyframes pulse {
+
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.15);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+
+}
+
+/* ===================================
+   RIGHT SIDEBAR
+=================================== */
+
+.right-sidebar {
+  position: sticky;
+  top: 20px;
+}
+
+.goal-card {
+  background: var(--surface);
+
+  border: 1px solid var(--border);
+
+  border-radius: 20px;
+
+  padding: 24px;
+
+  transition: .3s;
+}
+
+.goal-card:hover {
+  border-color: #444;
+
+  transform: translateY(-4px);
+
+  box-shadow:
+      0 14px 28px rgba(0,0,0,.35);
+}
+
+.goal-label {
+  color: var(--text-secondary);
+
+  font-size: 13px;
+
+  margin-bottom: 8px;
+}
+
+.goal-card h2 {
+  font-size: 28px;
+
+  margin-bottom: 14px;
+}
+
+.goal-text {
+  color: var(--text-secondary);
+
+  line-height: 1.7;
+
+  margin-bottom: 24px;
+}
+
+.goal-progress {
+  width: 100%;
+
+  height: 10px;
+
+  background: #272727;
+
+  border-radius: 999px;
+
+  overflow: hidden;
+
+  margin-bottom: 12px;
+}
+
+.goal-progress-fill {
+  height: 100%;
+
+  background: linear-gradient(
+      90deg,
+      #fff,
+      #888
+  );
+
+  border-radius: inherit;
+}
+
+.goal-card span {
+  color: var(--text-secondary);
+
+  font-size: 13px;
+}
+/* ===================================
+   QUICK ACTIONS
+=================================== */
+
+.actions {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+}
+
+.action-card {
+  background: var(--surface);
+
+  border: 1px solid var(--border);
+
+  border-radius: 18px;
+
+  padding: 28px;
+
+  cursor: pointer;
+
+  transition: all .3s ease;
+
+  position: relative;
+
+  overflow: hidden;
+}
+
+.action-card::before {
+  content: "";
+
+  position: absolute;
+
+  inset: 0;
+
+  background: linear-gradient(
+    135deg,
+    rgba(255,255,255,.04),
+    transparent
+  );
+
+  opacity: 0;
+
+  transition: .3s;
+}
+
+.action-card:hover {
+
+  transform: translateY(-8px);
+
+  border-color: #505050;
+
+  box-shadow:
+      0 18px 35px rgba(0,0,0,.45);
+
+}
+
+.action-card:hover::before{
+    opacity:1;
+}
+
+.action-card svg{
+
+    color:white;
+
+    margin-bottom:18px;
+}
+
+.action-card h3{
+
+    margin-bottom:10px;
+
+    font-size:20px;
+}
+
+.action-card p{
+
+    color:var(--text-secondary);
+
+    line-height:1.6;
+
+    font-size:14px;
+}
+
+/* ===================================
+   RECENT ACTIVITY
+=================================== */
+
+.recent-card{
+
+    margin-bottom:20px;
+}
+
+.activity-list{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:22px;
+}
+
+.activity-item{
+
+    display:flex;
+
+    align-items:flex-start;
+
+    gap:18px;
+
+    padding-bottom:18px;
+
+    border-bottom:1px solid #242424;
+}
+
+.activity-item:last-child{
+
+    border-bottom:none;
+
+    padding-bottom:0;
+}
+
+.activity-dot{
+
+    width:14px;
+
+    height:14px;
+
+    border-radius:50%;
+
+    margin-top:6px;
+
+    background:#555;
+
+    flex-shrink:0;
+}
+
+.activity-dot.completed{
+
+    background:#22C55E;
+
+    box-shadow:
+        0 0 10px rgba(34,197,94,.6);
+}
+
+.activity-item strong{
+
+    display:block;
+
+    margin-bottom:6px;
+}
+
+.activity-item p{
+
+    color:var(--text-secondary);
+
+    line-height:1.6;
+
+    font-size:14px;
+}
+
+/* ===================================
+   GLOBAL HOVER
+=================================== */
+
+.card,
+.goal-card,
+.action-card{
+
+    transition:
+        transform .3s,
+        border-color .3s,
+        box-shadow .3s;
+}
+
+.card:hover,
+.goal-card:hover,
+.action-card:hover{
+
+    border-color:#444;
+
+    transform:translateY(-5px);
+
+    box-shadow:
+        0 16px 40px rgba(0,0,0,.45);
+}
+
+/* ===================================
+   SCROLLBAR
+=================================== */
+
+::-webkit-scrollbar{
+
+    width:8px;
+}
+
+::-webkit-scrollbar-track{
+
+    background:#111;
+}
+
+::-webkit-scrollbar-thumb{
+
+    background:#333;
+
+    border-radius:999px;
+}
+
+::-webkit-scrollbar-thumb:hover{
+
+    background:#555;
+}
+
+/* ===================================
+   RESPONSIVE
+=================================== */
+
+@media (max-width:1200px){
+
+.dashboard{
+
+grid-template-columns:1fr;
+
+}
+
+.right-sidebar{
+
+position:relative;
+
+top:0;
+
+}
+
+.middle-grid{
+
+grid-template-columns:1fr;
+
+}
+
+.top-grid{
+
+grid-template-columns:1fr;
+
+}
+
+.actions{
+
+grid-template-columns:repeat(2,1fr);
+
+}
+
+.hero{
+
+flex-direction:column;
+
+align-items:flex-start;
+
+gap:24px;
+
+}
+
+.hero-action{
+
+align-items:flex-start;
+
+}
+
+}
+
+@media(max-width:768px){
+
+.actions{
+
+grid-template-columns:1fr;
+
+}
+
+.hero{
+
+padding:22px;
+
+}
+
+.card{
+
+padding:20px;
+
+}
+
+.hero h1{
+
+font-size:28px;
+
+}
+
+.progress-card h1{
+
+font-size:42px;
+
+}
+
+.goal-card h2{
+
+font-size:24px;
+
+}
+
+}

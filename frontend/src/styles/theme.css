@@ -1,0 +1,25 @@
+:root {
+  --bg: #0A0A0A;
+--surface: #141414;
+--surface-2: #1C1C1C;
+
+--border: #2A2A2A;
+
+--text: #FFFFFF;
+--text-secondary: #A1A1AA;
+
+--primary: #7b6f6f;
+--accent: #6B7280;
+
+--success: #22C55E;
+--warning: #F59E0B;
+--danger: #EF4444;
+  --radius: 14px;
+}
+
+body {
+  margin: 0;
+  font-family: Inter, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
