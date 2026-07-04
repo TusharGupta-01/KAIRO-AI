@@ -1,6 +1,6 @@
 import { X, Bot, Send } from "lucide-react";
 import { useState } from "react";
-
+import { askKnowledgeVault } from "../../services/chat.service";
 const ChatModal = ({ open, onClose }) => {
   const [message, setMessage] = useState("");
 
@@ -11,31 +11,71 @@ const ChatModal = ({ open, onClose }) => {
     },
   ]);
 
-  const handleSend = () => {
-    if (!message.trim()) return;
+  const handleSend = async () => {
+  if (!message.trim()) return;
 
-    const userQuestion = message;
+  const userQuestion = message.trim();
+
+  setMessages((prev) => [
+    ...prev,
+    {
+      sender: "user",
+      text: userQuestion,
+    },
+  ]);
+
+  setMessage("");
+
+  try {
+   const result = await askKnowledgeVault(userQuestion);
+
+if (result.type === "chat") {
+  setMessages((previous) => [
+    ...previous,
+    {
+      sender: "ai",
+      text: result.answer,
+    },
+  ]);
+}
+
+if (result.type === "search") {
+  if (result.resources.length === 0) {
+    setMessages((previous) => [
+      ...previous,
+      {
+        sender: "ai",
+        text: "❌ No matching document found.",
+      },
+    ]);
+  } else {
+    const files = result.resources
+      .map((r) => `📄 ${r.name}`)
+      .join("\n");
 
     setMessages((previous) => [
       ...previous,
       {
-        sender: "user",
-        text: userQuestion,
+        sender: "ai",
+        text:
+          "I found these matching resources:\n\n" +
+          files,
       },
     ]);
+  }
+}
+  } catch (error) {
+    console.error(error);
 
-    setMessage("");
-
-    setTimeout(() => {
-      setMessages((previous) => [
-        ...previous,
-        {
-          sender: "ai",
-          text: `This is a prototype response for:\n\n"${userQuestion}"\n\nLater this chat will use RAG to answer directly from your uploaded documents.`,
-        },
-      ]);
-    }, 800);
-  };
+    setMessages((prev) => [
+      ...prev,
+      {
+        sender: "ai",
+        text: "Sorry, something went wrong while contacting KAIRO AI.",
+      },
+    ]);
+  }
+};
 
   if (!open) return null;
 

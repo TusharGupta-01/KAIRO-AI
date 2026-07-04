@@ -207,12 +207,12 @@
 import { useEffect, useState } from "react";
 import { X, Link2, Folder, Globe } from "lucide-react";
 import { useFolders } from "../../../hooks/folderContext";
+import { createLink } from "../../../services/resource.service";
 
 const ImportLinkModal = ({
   open,
   onClose,
   folders,
-  onImport,
 }) => {
   const [url, setUrl] = useState("");
   const [title, setTitle] = useState("");
@@ -232,19 +232,28 @@ const ImportLinkModal = ({
 
   if (!open) return null;
 
-  const handleImport = () => {
+  const handleImport = async () => {
     if (!url.trim()) return;
     if (!selectedFolder) return;
 
-    onImport({
-      title,
-      url,
-      folderId: Number(selectedFolder),
-    });
+    try {
+      await createLink({
+        title: title || url,
+        url,
+        folder: selectedFolder,
+      });
 
-    setUrl("");
-    setTitle("");
-    setSelectedFolder("");
+      setUrl("");
+      setTitle("");
+      setSelectedFolder("");
+
+      onClose();
+
+      window.location.reload();
+    } catch (err) {
+      console.error(err);
+      alert("Failed to import link");
+    }
   };
 
   return (
