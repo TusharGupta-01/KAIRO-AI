@@ -1,4 +1,4 @@
-import {
+import { folderAPI } from "../../services/api";import {
   createContext,
   useContext,
   useState,
@@ -67,30 +67,62 @@ const addActivity = (text) => {
   // Folder CRUD
   // --------------------------
 
-  const createFolder = (folder) => {
-    setFolders((previous) => [...previous, folder]);
+  const createFolder = async (folder) => {
+  try {
+    const response = await folderAPI.create({
+      name: folder.name,
+      color: folder.color,
+    });
+
+    setFolders((previous) => [
+      ...previous,
+      {
+        ...response.data.data,
+        id: response.data.data._id,
+        resources: [],
+      },
+    ]);
+
     addActivity(`📁 Created folder "${folder.name}"`);
-  };
-
-  const deleteFolder = (id) => {
-
-  const folder = folders.find((folder) => folder.id === id);
-
-  if (folder) {
-    addActivity(`🗑 Deleted folder "${folder.name}"`);
+  } catch (error) {
+    console.error(error);
   }
-
-  setFolders((previous) =>
-    previous.filter((folder) => folder.id !== id)
-  );
-
 };
 
-  const updateFolder = (id, updatedFolder) => {
+  const deleteFolder = async (id) => {
+  try {
+    await folderAPI.remove(id);
+    setFolders((previous) => previous.filter((folder) => folder.id !== id));
+    addActivity(`🗑 Deleted folder`);
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+  const updateFolder = async (id, updatedFolder) => {
+  try {
+    const response = await folderAPI.update(id, updatedFolder);
+
+    const updated = {
+      ...response.data.data,
+      id: response.data.data._id,
+    };
+
     setFolders((previous) =>
-      previous.map((folder) => (folder.id === id ? updatedFolder : folder)),
+      previous.map((folder) =>
+        folder.id === id ? updated : folder
+      )
     );
-  };
+
+    addActivity(`📁 Updated folder "${updated.name}"`);
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+  
+
+  
 
   // --------------------------
   // Resource CRUD
@@ -260,6 +292,26 @@ if (current) {
   setIsChatModalOpen(false);
   setActiveFolderId(null);
 };
+
+useEffect(() => {
+  const fetchFolders = async () => {
+    try {
+      const response = await folderAPI.getAll();
+
+      const folders = response.data.data.map((folder) => ({
+        ...folder,
+        id: folder._id,
+        resources: [],
+      }));
+
+      setFolders(folders);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  fetchFolders();
+}, []);
 
 // --------------------------
 // Save to Local Storage

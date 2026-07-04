@@ -2,6 +2,7 @@ import CreateNoteModal from "../../resource/createNoteModal";
 import { useState } from "react";
 import { Outlet } from "react-router-dom";
 
+import { uploadResource } from "../../../services/resource.service";
 import ChatModal from "../../ai/chatModal";
 import Sidebar from "../../navigation/sidebar";
 import Navbar from "../../navigation/navbar";
@@ -82,33 +83,50 @@ const KnowledgeVaultLayout = () => {
   // Upload Resource
   // --------------------------
 
-  const handleUpload = () => {
-    if (!selectedFile) return;
+   const handleUpload = async () => {
+  if (!selectedFile) {
+    alert("Please select a file.");
+    return;
+  }
 
-    if (!selectedFolder) return;
+  if (!selectedFolder) {
+    alert("Please select a folder.");
+    return;
+  }
 
-    const extension = selectedFile.name.split(".").pop().toLowerCase();
+  try {
+    const formData = new FormData();
 
-    const resource = {
-      id: Date.now(),
-      name: selectedFile.name,
-      type: extension,
-      size: selectedFile.size,
-      file: selectedFile,
-      url: URL.createObjectURL(selectedFile),
-      uploadedAt: new Date(),
-      favorite: false,
-      tags: [],
-      notes: [],
-    };
+    formData.append("file", selectedFile);
+    formData.append("folder", selectedFolder);
 
-    addResource(selectedFolder, resource);
+    const extension = selectedFile.name
+      .split(".")
+      .pop()
+      .toLowerCase();
+
+    formData.append("type", extension);
+
+    await uploadResource(formData);
+    window.location.reload();
+    
+
+    alert("Resource uploaded successfully!");
 
     setSelectedFile(null);
     setSelectedFolder("");
 
     closeUploadModal();
-  };
+  } catch (error) {
+    console.error(error);
+
+    if (error.response) {
+      console.log(error.response.data);
+    }
+
+    alert("Upload failed");
+  }
+};
 
   // --------------------------
   // Import Link
