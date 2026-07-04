@@ -14,6 +14,7 @@ import Signup from "../pages/Signup";
 import ProfileSetup from "../pages/ProfileSetup";
 
 import KnowledgeVaultRoutes from "../../modules/knowledgeVault/routes/knowledgeVaultRoutes";
+import Landing from "../pages/Landing";
 
 function AppRoutes() {
   return (
@@ -24,6 +25,7 @@ function AppRoutes() {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/profile-setup" element={<ProfileSetup />} />
+        <Route path="/" element={<Landing />} />
         {/* Protected Routes */}
         <Route
           element={
