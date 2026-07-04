@@ -190,8 +190,7 @@ import { useEffect, useState } from "react";
 import { X, FileText, Folder } from "lucide-react";
 
 import { useFolders } from "../../../hooks/folderContext";
-
-const CreateNoteModal = ({
+import { createNote } from "../../../services/resource.service";const CreateNoteModal = ({
   open,
   onClose,
   folders,
@@ -215,20 +214,30 @@ const CreateNoteModal = ({
 
   if (!open) return null;
 
-  const handleCreate = () => {
-    if (!title.trim()) return;
-    if (!selectedFolder) return;
+  const handleCreate = async () => {
+  if (!title.trim()) return;
 
-    onCreate({
+  if (!selectedFolder) return;
+
+  try {
+    await createNote({
       title,
       content,
-      folderId: Number(selectedFolder),
+      folder: selectedFolder,
     });
 
     setTitle("");
     setContent("");
     setSelectedFolder("");
-  };
+
+    onClose();
+
+    window.location.reload();
+  } catch (err) {
+    console.error(err);
+    alert("Failed to save note");
+  }
+};
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4 backdrop-blur-md">
