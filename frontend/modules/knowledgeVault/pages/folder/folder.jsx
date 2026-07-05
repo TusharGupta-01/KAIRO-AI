@@ -81,31 +81,51 @@ const FolderPage = () => {
     }
   };
 
-  const handlePreview = (resource) => {
-  // Notes
+//   const handlePreview = (resource) => {
+//   // Notes
+//   if (resource.type === "note") {
+//     setSelectedNote(resource);
+//     return;
+//   }
+
+//   // External Links
+//   if (resource.type === "link") {
+//     window.open(resource.filePath, "_blank");
+//     return;
+//   }
+
+//   // Uploaded Files
+//   if (!resource.filePath) {
+//     alert("Preview unavailable.");
+//     return;
+//   }
+
+//   window.open(
+//     `http://localhost:5000${resource.filePath}`,
+//     "_blank"
+// )
+// };
+const handlePreview = (resource) => {
   if (resource.type === "note") {
     setSelectedNote(resource);
     return;
   }
 
-  // External Links
-  if (resource.type === "link") {
-    window.open(resource.filePath, "_blank");
-    return;
-  }
-
-  // Uploaded Files
   if (!resource.filePath) {
     alert("Preview unavailable.");
     return;
   }
 
-  window.open(
-    `http://localhost:5000${resource.filePath}`,
-    "_blank"
-  );
-};
+  if (resource.type === "pdf") {
+    window.open(
+      `https://docs.google.com/gview?embedded=true&url=${encodeURIComponent(resource.filePath)}`,
+      "_blank"
+    );
+    return;
+  }
 
+  window.open(resource.filePath, "_blank");
+};
   const handleDelete = async (id) => {
     try {
       await deleteResource(id);
