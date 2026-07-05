@@ -35,7 +35,12 @@ const resourceSchema = new mongoose.Schema(
     filePath: {
   type: String,
   default: null,
-},content: {
+},
+cloudinaryId: {
+  type: String,
+  default: "",
+},
+content: {
         type: String,
         default: "",
       },
