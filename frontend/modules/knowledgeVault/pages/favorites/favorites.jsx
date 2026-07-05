@@ -63,10 +63,7 @@ const Favorites = () => {
     }
 
     if (resource.filePath) {
-      window.open(
-        `http://localhost:5000${resource.filePath}`,
-        "_blank"
-      );
+      window.open(resource.filePath, "_blank");
     }
   };
 
