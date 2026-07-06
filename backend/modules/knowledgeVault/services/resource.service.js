@@ -1,3 +1,8 @@
+
+const {
+  uploadToCloudinary,
+} = require("../utils/cloudinaryUpload");
+
 const Resource = require("../../../models/Resource");
 
 // ==========================
@@ -5,12 +10,23 @@ const Resource = require("../../../models/Resource");
 // ==========================
 
 const createResourceService = async (userId, data) => {
+ const uploaded = await uploadToCloudinary(
+  data.file
+);
+console.log("Secure URL:", uploaded.secure_url);
+console.log(uploaded);
+
   return await Resource.create({
     name: data.originalName,
     owner: userId,
     folder: data.folder || null,
     type: data.type,
-    filePath: data.fileUrl,
+
+    filePath: uploaded.secure_url,
+
+    cloudinaryId: uploaded.public_id,
+    mimeType: data.mimeType,
+
     fileSize: data.fileSize || 0,
   });
 };
