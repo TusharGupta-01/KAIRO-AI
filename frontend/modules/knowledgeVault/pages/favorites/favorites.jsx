@@ -19,6 +19,7 @@ import {
 import NotePreviewModal from "../../components/resource/notePreviewModal";
 import EmptyState from "../../components/feedback/emptyResourceState";
 
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 const Favorites = () => {
   const [resources, setResources] = useState([]);
   const [selectedNote, setSelectedNote] = useState(null);
@@ -63,10 +64,7 @@ const Favorites = () => {
     }
 
     if (resource.filePath) {
-      window.open(
-        `http://localhost:5000${resource.filePath}`,
-        "_blank"
-      );
+      window.open(`${BACKEND_URL}${resource.filePath}`, "_blank")
     }
   };
 
