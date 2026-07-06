@@ -10,10 +10,8 @@ import {
 } from "lucide-react";
 
 import EmptyState from "../../components/feedback/emptyResourceState";
-
-import {
-  getDeletedResources,
-} from "../../services/resource.service";
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+import { getDeletedResources } from "../../services/resource.service";
 
 const Trash = () => {
   const [resources, setResources] = useState([]);
@@ -43,36 +41,16 @@ const Trash = () => {
 
       case "ppt":
       case "pptx":
-        return (
-          <FileSpreadsheet
-            className="text-orange-400"
-            size={26}
-          />
-        );
+        return <FileSpreadsheet className="text-orange-400" size={26} />;
 
       case "image":
-        return (
-          <FileImage
-            className="text-emerald-400"
-            size={26}
-          />
-        );
+        return <FileImage className="text-emerald-400" size={26} />;
 
       case "link":
-        return (
-          <Link2
-            className="text-sky-400"
-            size={26}
-          />
-        );
+        return <Link2 className="text-sky-400" size={26} />;
 
       default:
-        return (
-          <FileArchive
-            className="text-violet-400"
-            size={26}
-          />
-        );
+        return <FileArchive className="text-violet-400" size={26} />;
     }
   };
 
@@ -84,9 +62,7 @@ const Trash = () => {
             Recycle Bin
           </p>
 
-          <h1 className="mt-2 text-4xl font-bold text-white">
-            Trash
-          </h1>
+          <h1 className="mt-2 text-4xl font-bold text-white">Trash</h1>
 
           <p className="mt-3 max-w-2xl text-zinc-400">
             Deleted resources are stored here temporarily.
@@ -104,41 +80,28 @@ const Trash = () => {
 
   return (
     <div className="mx-auto max-w-7xl space-y-8">
-
       <section className="rounded-3xl border border-zinc-800 bg-[#1A1A1E] p-8">
         <p className="text-xs font-semibold uppercase tracking-[0.25em] text-zinc-500">
           Recycle Bin
         </p>
 
-        <h1 className="mt-2 text-4xl font-bold text-white">
-          Trash
-        </h1>
+        <h1 className="mt-2 text-4xl font-bold text-white">Trash</h1>
 
-        <p className="mt-3 text-zinc-400">
-          Deleted resources
-        </p>
+        <p className="mt-3 text-zinc-400">Deleted resources</p>
       </section>
 
       <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-
         {resources.map((resource) => (
-
           <div
             key={resource._id}
             className="rounded-3xl border border-zinc-800 bg-[#1A1A1E] p-6"
           >
-
             <div className="mb-6 flex items-center justify-between">
-
               <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-zinc-800">
                 {getIcon(resource.type)}
               </div>
 
-              <Trash2
-                className="text-red-400"
-                size={22}
-              />
-
+              <Trash2 className="text-red-400" size={22} />
             </div>
 
             <h3 className="truncate text-lg font-semibold text-white">
@@ -151,23 +114,16 @@ const Trash = () => {
 
             <button
               onClick={() =>
-                window.open(
-                  `http://localhost:5000${resource.filePath}`,
-                  "_blank"
-                )
+                window.open(`${BACKEND_URL}${resource.filePath}`, "_blank")
               }
               className="mt-6 flex w-full items-center justify-center gap-2 rounded-xl border border-zinc-700 bg-zinc-800 py-3 text-white transition hover:bg-zinc-700"
             >
               <Eye size={16} />
               Preview
             </button>
-
           </div>
-
         ))}
-
       </div>
-
     </div>
   );
 };

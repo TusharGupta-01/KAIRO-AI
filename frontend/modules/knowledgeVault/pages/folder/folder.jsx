@@ -21,7 +21,7 @@ import { useParams } from "react-router-dom";
 import { useFolders } from "../../hooks/folderContext";
 
 import NotePreviewModal from "../../components/resource/notePreviewModal";
-
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 const FolderPage = () => {
   const { folderId } = useParams();
 
@@ -81,51 +81,28 @@ const FolderPage = () => {
     }
   };
 
-//   const handlePreview = (resource) => {
-//   // Notes
-//   if (resource.type === "note") {
-//     setSelectedNote(resource);
-//     return;
-//   }
+  const handlePreview = (resource) => {
+    // Notes
+    if (resource.type === "note") {
+      setSelectedNote(resource);
+      return;
+    }
 
-//   // External Links
-//   if (resource.type === "link") {
-//     window.open(resource.filePath, "_blank");
-//     return;
-//   }
+    // External Links
+    if (resource.type === "link") {
+      window.open(resource.filePath, "_blank");
+      return;
+    }
 
-//   // Uploaded Files
-//   if (!resource.filePath) {
-//     alert("Preview unavailable.");
-//     return;
-//   }
+    // Uploaded Files
+    if (!resource.filePath) {
+      alert("Preview unavailable.");
+      return;
+    }
 
-//   window.open(
-//     `http://localhost:5000${resource.filePath}`,
-//     "_blank"
-// )
-// };
-const handlePreview = (resource) => {
-  if (resource.type === "note") {
-    setSelectedNote(resource);
-    return;
-  }
+    window.open(`${BACKEND_URL}${resource.filePath}`, "_blank");
+  };
 
-  if (!resource.filePath) {
-    alert("Preview unavailable.");
-    return;
-  }
-
-  if (resource.type === "pdf") {
-    window.open(
-      `https://docs.google.com/gview?embedded=true&url=${encodeURIComponent(resource.filePath)}`,
-      "_blank"
-    );
-    return;
-  }
-
-  window.open(resource.filePath, "_blank");
-};
   const handleDelete = async (id) => {
     try {
       await deleteResource(id);
